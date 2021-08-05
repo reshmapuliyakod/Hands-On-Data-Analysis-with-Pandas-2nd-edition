@@ -1,0 +1,55 @@
+Data Cleaning:
+
+Renaming Columns:
+df.rename(
+columns= {'col1':'renamed value'
+,'col2':'renamed value'},
+inplace=True # updates the original dataframe
+)
+
+df.rename(str.upper,axis='columns').columns
+converts the column names to upper case
+
+Type Conversion:
+Check the datatypes of the columns to ensure they are right for the analysis purpose
+***in certain cases , when we have missing values for a decimal column , it can be represented as n/a or ? . This makes the type of the column as Object rather than float
+***In such case , type conversion would throw error
+df.dtypes - list the data types of all the columns in the dataframe
+
+converting to date time:
+pd.to_datetime()
+
+We can use `tz_localize()` on a `DatetimeIndex` object to convert to a desired timezone:
+
+eastern = pd.read_csv(
+    'data/nyc_temperatures.csv', index_col='date', parse_dates=True
+).tz_localize('EST')
+eastern.head()
+
+tz.convert to convert to other time zones from the above set
+
+
+df.assign() can be used to work with multiple columns at once
+***astype() can also be used for the type conversions
+df[colname].astype('int')
+df[colname].astype('category')
+
+
+Reordering, Reindexing, Sorting:
+
+df.sort_values(by =['colname'],ascending=True)
+***In case of ties , we can use additional columns to sort values
+df.sort_values(by =[col1,col2],ascending=[True,False])
+*** ignore_index - helps with creating new index after the sorting
+df.sort_values(by =[col1,col2],ascending=[True,False],ignore_index=True)
+***nlargest() - find the nlargest values, nsmallest()- find the smallest values
+df.nlargets(n=10,columns='colname')
+df.nsmallest(n=5, columns=['temp_C', 'date'])
+
+***sample method 
+df.sample(5,random_state=0).index
+df.sample(5,random_state=0).sort_index().index
+
+df.sort_index(axis=1)  --- sort the column index
+
+***We must sort the index to compare two dataframes. If the index is different, but the data is the same, they will be marked not-equal:
