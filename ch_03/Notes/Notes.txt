@@ -53,3 +53,32 @@ df.sample(5,random_state=0).sort_index().index
 df.sort_index(axis=1)  --- sort the column index
 
 ***We must sort the index to compare two dataframes. If the index is different, but the data is the same, they will be marked not-equal:
+
+Reshaping the data :
+
+Transposing the dataframe:
+flipping the rows with columns
+dataframe.T
+
+Pivoting DataFrames:
+***long format to wide format
+***pivot() method is used - specify column that holds the values(values attribute) and the column that contains the columns name in the wide format(columns attribute)
+dataframe.pivot(index='',columns='',values='')
+
+multiple value columns can be passed in  a list
+dataframe.pivot(index='',columns='',values=['',''])
+
+setting multiple values as index:
+dataframe.set_index(['',''])
+
+***Pivot method allows only single index. if we have to use multi index, unstack() method has to be used.
+
+unstack() should be our method of choice when we have a multi-level index and would like to move one or more of the levels to the columns; 
+however, if we are simply using a single index, the pivot() method's syntax is likely to be easier to specify correctly since it's more apparent which data will end up where.
+
+Melting Dataframes: 
+
+Melting is the process of converting wide format to long format
+unpivoting the dataframe
+melt() - method is used
+
